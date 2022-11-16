@@ -1,0 +1,46 @@
+﻿@model ProyectoBDD.Models.Escala
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<div>
+    <h4>Escala</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaHora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaHora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vuelo.idVuelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vuelo.idVuelo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idEscala }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

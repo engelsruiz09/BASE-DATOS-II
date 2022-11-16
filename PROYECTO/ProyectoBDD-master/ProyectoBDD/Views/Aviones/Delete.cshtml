@@ -1,0 +1,60 @@
+﻿@model ProyectoBDD.Models.Avion
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Avion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Compañia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Compañia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Carga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Carga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alcance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alcance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoAvion.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoAvion.Tipo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

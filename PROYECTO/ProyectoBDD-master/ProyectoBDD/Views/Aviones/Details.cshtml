@@ -1,0 +1,54 @@
+﻿@model ProyectoBDD.Models.Avion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<div>
+    <h4>Avion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Compañia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Compañia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Carga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Carga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alcance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alcance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoAvion.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoAvion.Tipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idAvion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,76 @@
+﻿@model ProyectoBDD.Models.VueloPasajero
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VueloPasajero</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoAsiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoAsiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asiento.TipoAsiento.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asiento.TipoAsiento.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pasajero.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pasajero.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEstatus.Estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEstatus.Estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vuelo.idVuelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vuelo.idVuelo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,94 @@
+﻿@model ProyectoBDD.Models.Vuelo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<div>
+    <h4>Vuelo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CiudadOrigen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CiudadOrigen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CiudadDestino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CiudadDestino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AeropuertoOrigen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AeropuertoOrigen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AeropuertoDestino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AeropuertoDestino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaSalida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaSalida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaLlegada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaLlegada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jornada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jornada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avion.Compañia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avion.Compañia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idVuelo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

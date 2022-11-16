@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ProyectoBDD.Models.SP_VUELO_ASIENTOS_Result>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NoAsiento)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.idAsiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idPasajero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idTipoEstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idVuelo)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoAsiento)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.idAsiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idPasajero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idTipoEstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idVuelo)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idVueloPasajero }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idVueloPasajero }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idVueloPasajero })
+        </td>
+    </tr>
+}
+
+</table>

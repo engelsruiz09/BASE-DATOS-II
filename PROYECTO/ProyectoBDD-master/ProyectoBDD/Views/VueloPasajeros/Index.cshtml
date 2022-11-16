@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProyectoBDD.Models.VueloPasajero>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<p>
+    @Html.ActionLink("Asignar Tripulación", "Members")
+    <form asp-action="Index" method="post" enctype="multipart/form-data">
+        <input type="number" name="idVuelo" />
+        <input type="submit" value="Buscar" />
+    </form>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NoAsiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asiento.TipoAsiento.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pasajero.Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoEstatus.Estatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vuelo.idVuelo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoAsiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asiento.TipoAsiento.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pasajero.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoEstatus.Estatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vuelo.idVuelo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idVueloPasajero }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idVueloPasajero }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idVueloPasajero })
+            </td>
+        </tr>
+    }
+
+</table>

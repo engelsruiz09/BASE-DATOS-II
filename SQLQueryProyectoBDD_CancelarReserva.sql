@@ -1,0 +1,27 @@
+CREATE OR ALTER PROCEDURE dbo.SP_CANCELAR_RESERVA(@ID_VUELO_PASAJERO INT)
+AS BEGIN
+BEGIN TRAN
+BEGIN TRY
+
+	IF EXISTS(SELECT * FROM VueloPasajero WHERE idVueloPasajero=@ID_VUELO_PASAJERO)
+	BEGIN
+		IF EXISTS(SELECT * FROM VueloPasajero WHERE idTipoEstatus=1)
+		BEGIN 
+			UPDATE VueloPasajero SET
+			idPasajero = DEFAULT NULL,
+			idTipoEstatus = 1,
+			Fecha DEFAULT NULL
+			WHERE
+			idVueloPasajero=@ID_VUELO_PASAJERO
+		END
+		ELSE
+			THROW 50000, 'El estatus ya esta disponible', 1;
+	END
+	ELSE	
+		THROW 50000, 'El asiento o el pasajero no existe', 1;
+END TRY
+BEGIN CATCH
+	THROW
+	ROLLBACK TRAN
+END CATCH;
+END

@@ -1,0 +1,1035 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyectoBDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asiento">
+          <Key>
+            <PropertyRef Name="idAsiento" />
+          </Key>
+          <Property Name="idAsiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAvion" Type="int" />
+          <Property Name="idTipoAsiento" Type="int" />
+          <Property Name="Cantidad" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Avion">
+          <Key>
+            <PropertyRef Name="idAvion" />
+          </Key>
+          <Property Name="idAvion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipoAvion" Type="int" />
+          <Property Name="Compañia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Carga" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Alcance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cola">
+          <Key>
+            <PropertyRef Name="idCola" />
+          </Key>
+          <Property Name="idCola" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPasajero" Type="int" />
+          <Property Name="idVueloPasajero" Type="int" />
+          <Property Name="Fecha" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Escala">
+          <Key>
+            <PropertyRef Name="idEscala" />
+          </Key>
+          <Property Name="idEscala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idVuelo" Type="int" />
+          <Property Name="Destino" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaHora" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pasajero">
+          <Key>
+            <PropertyRef Name="idPasajero" />
+          </Key>
+          <Property Name="idPasajero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipoPasajero" Type="int" />
+          <Property Name="Nombres" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pasaporte" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoAsiento">
+          <Key>
+            <PropertyRef Name="idTipoAsiento" />
+          </Key>
+          <Property Name="idTipoAsiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoAvion">
+          <Key>
+            <PropertyRef Name="idTipoAvion" />
+          </Key>
+          <Property Name="idTipoAvion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoEstatus">
+          <Key>
+            <PropertyRef Name="idTipoEstatus" />
+          </Key>
+          <Property Name="idTipoEstatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPasajero">
+          <Key>
+            <PropertyRef Name="idTipoPasajero" />
+          </Key>
+          <Property Name="idTipoPasajero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TranLog">
+          <Key>
+            <PropertyRef Name="idTranLog" />
+          </Key>
+          <Property Name="idTranLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TX" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Tabla" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vuelo">
+          <Key>
+            <PropertyRef Name="idVuelo" />
+          </Key>
+          <Property Name="idVuelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAvion" Type="int" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+          <Property Name="CiudadOrigen" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CiudadDestino" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AeropuertoOrigen" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="AeropuertoDestino" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="FechaSalida" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaLlegada" Type="smalldatetime" Nullable="false" />
+          <Property Name="Jornada" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VueloPasajero">
+          <Key>
+            <PropertyRef Name="idVueloPasajero" />
+          </Key>
+          <Property Name="idVueloPasajero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idVuelo" Type="int" />
+          <Property Name="idPasajero" Type="int" />
+          <Property Name="idAsiento" Type="int" />
+          <Property Name="NoAsiento" Type="int" />
+          <Property Name="idTipoEstatus" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" />
+        </EntityType>
+        <Association Name="FK_AVION">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="0..1" />
+          <End Role="Asiento" Type="Self.Asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="idAvion" />
+            </Principal>
+            <Dependent Role="Asiento">
+              <PropertyRef Name="idAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AVION_TIPOAVION">
+          <End Role="TipoAvion" Type="Self.TipoAvion" Multiplicity="0..1" />
+          <End Role="Avion" Type="Self.Avion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAvion">
+              <PropertyRef Name="idTipoAvion" />
+            </Principal>
+            <Dependent Role="Avion">
+              <PropertyRef Name="idTipoAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLA_PASAJERO">
+          <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="0..1" />
+          <End Role="Cola" Type="Self.Cola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajero">
+              <PropertyRef Name="idPasajero" />
+            </Principal>
+            <Dependent Role="Cola">
+              <PropertyRef Name="idPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLA_VUELOPASAJERO">
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="0..1" />
+          <End Role="Cola" Type="Self.Cola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VueloPasajero">
+              <PropertyRef Name="idVueloPasajero" />
+            </Principal>
+            <Dependent Role="Cola">
+              <PropertyRef Name="idVueloPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESCALA_VUELO">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="0..1" />
+          <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="idVuelo" />
+            </Principal>
+            <Dependent Role="Escala">
+              <PropertyRef Name="idVuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PASAJERO_TIPOPASAJERO">
+          <End Role="TipoPasajero" Type="Self.TipoPasajero" Multiplicity="0..1" />
+          <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPasajero">
+              <PropertyRef Name="idTipoPasajero" />
+            </Principal>
+            <Dependent Role="Pasajero">
+              <PropertyRef Name="idTipoPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPOASIENTO">
+          <End Role="TipoAsiento" Type="Self.TipoAsiento" Multiplicity="0..1" />
+          <End Role="Asiento" Type="Self.Asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAsiento">
+              <PropertyRef Name="idTipoAsiento" />
+            </Principal>
+            <Dependent Role="Asiento">
+              <PropertyRef Name="idTipoAsiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELO_AVION">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="0..1" />
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="idAvion" />
+            </Principal>
+            <Dependent Role="Vuelo">
+              <PropertyRef Name="idAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_ASIENTO">
+          <End Role="Asiento" Type="Self.Asiento" Multiplicity="0..1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiento">
+              <PropertyRef Name="idAsiento" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idAsiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_ESTATUS">
+          <End Role="TipoEstatus" Type="Self.TipoEstatus" Multiplicity="1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstatus">
+              <PropertyRef Name="idTipoEstatus" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idTipoEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_PASAJERO">
+          <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="0..1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajero">
+              <PropertyRef Name="idPasajero" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_VUELO">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="0..1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="idVuelo" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idVuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_CANCELAR_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VUELOPASAJERO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_CANCELAR_VUELO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VUELO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_COLA_AÑO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="año" Type="varchar" Mode="In" />
+          <Parameter Name="mes" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_CONFIRMADOS_DIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_CONFIRMAR_ASIENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPasajero" Type="int" Mode="In" />
+          <Parameter Name="idVuelo" Type="int" Mode="In" />
+          <Parameter Name="NoAsiento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_INGRESAR_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTipoPasajero" Type="int" Mode="In" />
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Pasaporte" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_INGRESAR_CLIENTE_BULK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="path" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_INGRESAR_ESCALA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VUELO" Type="int" Mode="In" />
+          <Parameter Name="DESTINO" Type="varchar" Mode="In" />
+          <Parameter Name="FECHA" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="SP_INGRESAR_TRANLOG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TX" Type="varchar" Mode="In" />
+          <Parameter Name="TIPO" Type="varchar" Mode="In" />
+          <Parameter Name="TABLA" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_INGRESAR_TRIPULACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PASAJERO" Type="int" Mode="In" />
+          <Parameter Name="VUELO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_INGRESAR_VUELO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AVION" Type="int" Mode="In" />
+          <Parameter Name="CIUDADO" Type="varchar" Mode="In" />
+          <Parameter Name="CIUDADD" Type="varchar" Mode="In" />
+          <Parameter Name="AEROPUERTOO" Type="varchar" Mode="In" />
+          <Parameter Name="AEROPUERTOD" Type="varchar" Mode="In" />
+          <Parameter Name="FECHAS" Type="smalldatetime" Mode="In" />
+          <Parameter Name="FECHAL" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="SP_LOGS_FECHA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FECHAINICIO" Type="smalldatetime" Mode="In" />
+          <Parameter Name="FECHAFIN" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="SP_RESERVAR_ASIENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idVuelo" Type="int" Mode="In" />
+          <Parameter Name="NoAsiento" Type="int" Mode="In" />
+          <Parameter Name="idPasajero" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_VUELO_ASIENTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VUELO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_VUELO_ESCALAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VUELO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_VUELOS_COMERCIALES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FECHASALIDA" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProyectoBDDModelStoreContainer">
+          <EntitySet Name="Asiento" EntityType="Self.Asiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Avion" EntityType="Self.Avion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cola" EntityType="Self.Cola" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Escala" EntityType="Self.Escala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pasajero" EntityType="Self.Pasajero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoAsiento" EntityType="Self.TipoAsiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoAvion" EntityType="Self.TipoAvion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEstatus" EntityType="Self.TipoEstatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPasajero" EntityType="Self.TipoPasajero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranLog" EntityType="Self.TranLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vuelo" EntityType="Self.Vuelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VueloPasajero" EntityType="Self.VueloPasajero" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AVION" Association="Self.FK_AVION">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Asiento" EntitySet="Asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AVION_TIPOAVION" Association="Self.FK_AVION_TIPOAVION">
+            <End Role="TipoAvion" EntitySet="TipoAvion" />
+            <End Role="Avion" EntitySet="Avion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLA_PASAJERO" Association="Self.FK_COLA_PASAJERO">
+            <End Role="Pasajero" EntitySet="Pasajero" />
+            <End Role="Cola" EntitySet="Cola" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLA_VUELOPASAJERO" Association="Self.FK_COLA_VUELOPASAJERO">
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+            <End Role="Cola" EntitySet="Cola" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESCALA_VUELO" Association="Self.FK_ESCALA_VUELO">
+            <End Role="Vuelo" EntitySet="Vuelo" />
+            <End Role="Escala" EntitySet="Escala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PASAJERO_TIPOPASAJERO" Association="Self.FK_PASAJERO_TIPOPASAJERO">
+            <End Role="TipoPasajero" EntitySet="TipoPasajero" />
+            <End Role="Pasajero" EntitySet="Pasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPOASIENTO" Association="Self.FK_TIPOASIENTO">
+            <End Role="TipoAsiento" EntitySet="TipoAsiento" />
+            <End Role="Asiento" EntitySet="Asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELO_AVION" Association="Self.FK_VUELO_AVION">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Vuelo" EntitySet="Vuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_ASIENTO" Association="Self.FK_VUELOPASAJERO_ASIENTO">
+            <End Role="Asiento" EntitySet="Asiento" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_ESTATUS" Association="Self.FK_VUELOPASAJERO_ESTATUS">
+            <End Role="TipoEstatus" EntitySet="TipoEstatus" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_PASAJERO" Association="Self.FK_VUELOPASAJERO_PASAJERO">
+            <End Role="Pasajero" EntitySet="Pasajero" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_VUELO" Association="Self.FK_VUELOPASAJERO_VUELO">
+            <End Role="Vuelo" EntitySet="Vuelo" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoBDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asiento">
+          <Key>
+            <PropertyRef Name="idAsiento" />
+          </Key>
+          <Property Name="idAsiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAvion" Type="Int32" />
+          <Property Name="idTipoAsiento" Type="Int32" />
+          <Property Name="Cantidad" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Avion" Relationship="Self.FK_AVION" FromRole="Asiento" ToRole="Avion" />
+          <NavigationProperty Name="TipoAsiento" Relationship="Self.FK_TIPOASIENTO" FromRole="Asiento" ToRole="TipoAsiento" />
+          <NavigationProperty Name="VueloPasajero" Relationship="Self.FK_VUELOPASAJERO_ASIENTO" FromRole="Asiento" ToRole="VueloPasajero" />
+        </EntityType>
+        <EntityType Name="Avion">
+          <Key>
+            <PropertyRef Name="idAvion" />
+          </Key>
+          <Property Name="idAvion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoAvion" Type="Int32" />
+          <Property Name="Compañia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Carga" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Alcance" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asiento" Relationship="Self.FK_AVION" FromRole="Avion" ToRole="Asiento" />
+          <NavigationProperty Name="TipoAvion" Relationship="Self.FK_AVION_TIPOAVION" FromRole="Avion" ToRole="TipoAvion" />
+          <NavigationProperty Name="Vuelo" Relationship="Self.FK_VUELO_AVION" FromRole="Avion" ToRole="Vuelo" />
+        </EntityType>
+        <EntityType Name="Cola">
+          <Key>
+            <PropertyRef Name="idCola" />
+          </Key>
+          <Property Name="idCola" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPasajero" Type="Int32" />
+          <Property Name="idVueloPasajero" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Pasajero" Relationship="Self.FK_COLA_PASAJERO" FromRole="Cola" ToRole="Pasajero" />
+          <NavigationProperty Name="VueloPasajero" Relationship="Self.FK_COLA_VUELOPASAJERO" FromRole="Cola" ToRole="VueloPasajero" />
+        </EntityType>
+        <EntityType Name="Escala">
+          <Key>
+            <PropertyRef Name="idEscala" />
+          </Key>
+          <Property Name="idEscala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVuelo" Type="Int32" />
+          <Property Name="Destino" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Vuelo" Relationship="Self.FK_ESCALA_VUELO" FromRole="Escala" ToRole="Vuelo" />
+        </EntityType>
+        <EntityType Name="Pasajero">
+          <Key>
+            <PropertyRef Name="idPasajero" />
+          </Key>
+          <Property Name="idPasajero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoPasajero" Type="Int32" />
+          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pasaporte" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cola" Relationship="Self.FK_COLA_PASAJERO" FromRole="Pasajero" ToRole="Cola" />
+          <NavigationProperty Name="TipoPasajero" Relationship="Self.FK_PASAJERO_TIPOPASAJERO" FromRole="Pasajero" ToRole="TipoPasajero" />
+          <NavigationProperty Name="VueloPasajero" Relationship="Self.FK_VUELOPASAJERO_PASAJERO" FromRole="Pasajero" ToRole="VueloPasajero" />
+        </EntityType>
+        <EntityType Name="TipoAsiento">
+          <Key>
+            <PropertyRef Name="idTipoAsiento" />
+          </Key>
+          <Property Name="idTipoAsiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Asiento" Relationship="Self.FK_TIPOASIENTO" FromRole="TipoAsiento" ToRole="Asiento" />
+        </EntityType>
+        <EntityType Name="TipoAvion">
+          <Key>
+            <PropertyRef Name="idTipoAvion" />
+          </Key>
+          <Property Name="idTipoAvion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Avion" Relationship="Self.FK_AVION_TIPOAVION" FromRole="TipoAvion" ToRole="Avion" />
+        </EntityType>
+        <EntityType Name="TipoEstatus">
+          <Key>
+            <PropertyRef Name="idTipoEstatus" />
+          </Key>
+          <Property Name="idTipoEstatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VueloPasajero" Relationship="Self.FK_VUELOPASAJERO_ESTATUS" FromRole="TipoEstatus" ToRole="VueloPasajero" />
+        </EntityType>
+        <EntityType Name="TipoPasajero">
+          <Key>
+            <PropertyRef Name="idTipoPasajero" />
+          </Key>
+          <Property Name="idTipoPasajero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pasajero" Relationship="Self.FK_PASAJERO_TIPOPASAJERO" FromRole="TipoPasajero" ToRole="Pasajero" />
+        </EntityType>
+        <EntityType Name="Vuelo">
+          <Key>
+            <PropertyRef Name="idVuelo" />
+          </Key>
+          <Property Name="idVuelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAvion" Type="Int32" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="CiudadOrigen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CiudadDestino" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AeropuertoOrigen" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AeropuertoDestino" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaLlegada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Jornada" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Avion" Relationship="Self.FK_VUELO_AVION" FromRole="Vuelo" ToRole="Avion" />
+          <NavigationProperty Name="Escala" Relationship="Self.FK_ESCALA_VUELO" FromRole="Vuelo" ToRole="Escala" />
+          <NavigationProperty Name="VueloPasajero" Relationship="Self.FK_VUELOPASAJERO_VUELO" FromRole="Vuelo" ToRole="VueloPasajero" />
+        </EntityType>
+        <EntityType Name="VueloPasajero">
+          <Key>
+            <PropertyRef Name="idVueloPasajero" />
+          </Key>
+          <Property Name="idVueloPasajero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVuelo" Type="Int32" />
+          <Property Name="idPasajero" Type="Int32" />
+          <Property Name="idAsiento" Type="Int32" />
+          <Property Name="NoAsiento" Type="Int32" />
+          <Property Name="idTipoEstatus" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Asiento" Relationship="Self.FK_VUELOPASAJERO_ASIENTO" FromRole="VueloPasajero" ToRole="Asiento" />
+          <NavigationProperty Name="Cola" Relationship="Self.FK_COLA_VUELOPASAJERO" FromRole="VueloPasajero" ToRole="Cola" />
+          <NavigationProperty Name="Pasajero" Relationship="Self.FK_VUELOPASAJERO_PASAJERO" FromRole="VueloPasajero" ToRole="Pasajero" />
+          <NavigationProperty Name="TipoEstatus" Relationship="Self.FK_VUELOPASAJERO_ESTATUS" FromRole="VueloPasajero" ToRole="TipoEstatus" />
+          <NavigationProperty Name="Vuelo" Relationship="Self.FK_VUELOPASAJERO_VUELO" FromRole="VueloPasajero" ToRole="Vuelo" />
+        </EntityType>
+        <Association Name="FK_AVION">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="0..1" />
+          <End Role="Asiento" Type="Self.Asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="idAvion" />
+            </Principal>
+            <Dependent Role="Asiento">
+              <PropertyRef Name="idAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPOASIENTO">
+          <End Role="TipoAsiento" Type="Self.TipoAsiento" Multiplicity="0..1" />
+          <End Role="Asiento" Type="Self.Asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAsiento">
+              <PropertyRef Name="idTipoAsiento" />
+            </Principal>
+            <Dependent Role="Asiento">
+              <PropertyRef Name="idTipoAsiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_ASIENTO">
+          <End Role="Asiento" Type="Self.Asiento" Multiplicity="0..1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiento">
+              <PropertyRef Name="idAsiento" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idAsiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AVION_TIPOAVION">
+          <End Role="TipoAvion" Type="Self.TipoAvion" Multiplicity="0..1" />
+          <End Role="Avion" Type="Self.Avion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAvion">
+              <PropertyRef Name="idTipoAvion" />
+            </Principal>
+            <Dependent Role="Avion">
+              <PropertyRef Name="idTipoAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELO_AVION">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="0..1" />
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="idAvion" />
+            </Principal>
+            <Dependent Role="Vuelo">
+              <PropertyRef Name="idAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLA_PASAJERO">
+          <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="0..1" />
+          <End Role="Cola" Type="Self.Cola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajero">
+              <PropertyRef Name="idPasajero" />
+            </Principal>
+            <Dependent Role="Cola">
+              <PropertyRef Name="idPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLA_VUELOPASAJERO">
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="0..1" />
+          <End Role="Cola" Type="Self.Cola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VueloPasajero">
+              <PropertyRef Name="idVueloPasajero" />
+            </Principal>
+            <Dependent Role="Cola">
+              <PropertyRef Name="idVueloPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESCALA_VUELO">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="0..1" />
+          <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="idVuelo" />
+            </Principal>
+            <Dependent Role="Escala">
+              <PropertyRef Name="idVuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PASAJERO_TIPOPASAJERO">
+          <End Role="TipoPasajero" Type="Self.TipoPasajero" Multiplicity="0..1" />
+          <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPasajero">
+              <PropertyRef Name="idTipoPasajero" />
+            </Principal>
+            <Dependent Role="Pasajero">
+              <PropertyRef Name="idTipoPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_PASAJERO">
+          <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="0..1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajero">
+              <PropertyRef Name="idPasajero" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idPasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_ESTATUS">
+          <End Role="TipoEstatus" Type="Self.TipoEstatus" Multiplicity="1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstatus">
+              <PropertyRef Name="idTipoEstatus" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idTipoEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VUELOPASAJERO_VUELO">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="0..1" />
+          <End Role="VueloPasajero" Type="Self.VueloPasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="idVuelo" />
+            </Principal>
+            <Dependent Role="VueloPasajero">
+              <PropertyRef Name="idVuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoBDDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asiento" EntityType="Self.Asiento" />
+          <EntitySet Name="Avion" EntityType="Self.Avion" />
+          <EntitySet Name="Cola" EntityType="Self.Cola" />
+          <EntitySet Name="Escala" EntityType="Self.Escala" />
+          <EntitySet Name="Pasajero" EntityType="Self.Pasajero" />
+          <EntitySet Name="TipoAsiento" EntityType="Self.TipoAsiento" />
+          <EntitySet Name="TipoAvion" EntityType="Self.TipoAvion" />
+          <EntitySet Name="TipoEstatus" EntityType="Self.TipoEstatus" />
+          <EntitySet Name="TipoPasajero" EntityType="Self.TipoPasajero" />
+          <EntitySet Name="Vuelo" EntityType="Self.Vuelo" />
+          <EntitySet Name="VueloPasajero" EntityType="Self.VueloPasajero" />
+          <AssociationSet Name="FK_AVION" Association="Self.FK_AVION">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Asiento" EntitySet="Asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPOASIENTO" Association="Self.FK_TIPOASIENTO">
+            <End Role="TipoAsiento" EntitySet="TipoAsiento" />
+            <End Role="Asiento" EntitySet="Asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_ASIENTO" Association="Self.FK_VUELOPASAJERO_ASIENTO">
+            <End Role="Asiento" EntitySet="Asiento" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AVION_TIPOAVION" Association="Self.FK_AVION_TIPOAVION">
+            <End Role="TipoAvion" EntitySet="TipoAvion" />
+            <End Role="Avion" EntitySet="Avion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELO_AVION" Association="Self.FK_VUELO_AVION">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Vuelo" EntitySet="Vuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLA_PASAJERO" Association="Self.FK_COLA_PASAJERO">
+            <End Role="Pasajero" EntitySet="Pasajero" />
+            <End Role="Cola" EntitySet="Cola" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLA_VUELOPASAJERO" Association="Self.FK_COLA_VUELOPASAJERO">
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+            <End Role="Cola" EntitySet="Cola" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESCALA_VUELO" Association="Self.FK_ESCALA_VUELO">
+            <End Role="Vuelo" EntitySet="Vuelo" />
+            <End Role="Escala" EntitySet="Escala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PASAJERO_TIPOPASAJERO" Association="Self.FK_PASAJERO_TIPOPASAJERO">
+            <End Role="TipoPasajero" EntitySet="TipoPasajero" />
+            <End Role="Pasajero" EntitySet="Pasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_PASAJERO" Association="Self.FK_VUELOPASAJERO_PASAJERO">
+            <End Role="Pasajero" EntitySet="Pasajero" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_ESTATUS" Association="Self.FK_VUELOPASAJERO_ESTATUS">
+            <End Role="TipoEstatus" EntitySet="TipoEstatus" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VUELOPASAJERO_VUELO" Association="Self.FK_VUELOPASAJERO_VUELO">
+            <End Role="Vuelo" EntitySet="Vuelo" />
+            <End Role="VueloPasajero" EntitySet="VueloPasajero" />
+          </AssociationSet>
+          <FunctionImport Name="SP_INGRESAR_VUELO">
+            <Parameter Name="AVION" Mode="In" Type="Int32" />
+            <Parameter Name="CIUDADO" Mode="In" Type="String" />
+            <Parameter Name="CIUDADD" Mode="In" Type="String" />
+            <Parameter Name="AEROPUERTOO" Mode="In" Type="String" />
+            <Parameter Name="AEROPUERTOD" Mode="In" Type="String" />
+            <Parameter Name="FECHAS" Mode="In" Type="DateTime" />
+            <Parameter Name="FECHAL" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CONFIRMAR_ASIENTO">
+            <Parameter Name="idPasajero" Mode="In" Type="Int32" />
+            <Parameter Name="idVuelo" Mode="In" Type="Int32" />
+            <Parameter Name="NoAsiento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INGRESAR_CLIENTE">
+            <Parameter Name="idTipoPasajero" Mode="In" Type="Int32" />
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Pasaporte" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INGRESAR_CLIENTE_BULK">
+          <Parameter Name="path" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INGRESAR_TRIPULACION">
+            <Parameter Name="PASAJERO" Mode="In" Type="Int32" />
+            <Parameter Name="VUELO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_RESERVAR_ASIENTO">
+            <Parameter Name="idVuelo" Mode="In" Type="Int32" />
+            <Parameter Name="NoAsiento" Mode="In" Type="Int32" />
+            <Parameter Name="idPasajero" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INGRESAR_ESCALA">
+            <Parameter Name="VUELO" Mode="In" Type="Int32" />
+            <Parameter Name="DESTINO" Mode="In" Type="String" />
+            <Parameter Name="FECHA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CANCELAR_RESERVA">
+          <Parameter Name="VUELOPASAJERO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CANCELAR_VUELO">
+          <Parameter Name="VUELO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_VUELO_ASIENTOS" ReturnType="Collection(ProyectoBDDModel.SP_VUELO_ASIENTOS_Result)">
+          <Parameter Name="VUELO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_COLA_AÑO" ReturnType="Collection(Int32)">
+            <Parameter Name="año" Mode="In" Type="String" />
+            <Parameter Name="mes" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CONFIRMADOS_DIA" ReturnType="Collection(Int32)">
+          <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_VUELO_ESCALAS" ReturnType="Collection(ProyectoBDDModel.SP_VUELO_ESCALAS_Result)">
+          <Parameter Name="VUELO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TranLog" EntityType="ProyectoBDDModel.TranLog" />
+          <FunctionImport Name="SP_INGRESAR_TRANLOG">
+            <Parameter Name="TX" Mode="In" Type="String" />
+            <Parameter Name="TIPO" Mode="In" Type="String" />
+            <Parameter Name="TABLA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_LOGS_FECHA" ReturnType="Collection(ProyectoBDDModel.SP_LOGS_FECHA_Result)">
+            <Parameter Name="FECHAINICIO" Mode="In" Type="DateTime" />
+            <Parameter Name="FECHAFIN" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_VUELOS_COMERCIALES" ReturnType="Collection(Int32)">
+            <Parameter Name="FECHASALIDA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_VUELO_ASIENTOS_Result">
+          <Property Type="Int32" Name="idVueloPasajero" Nullable="false" />
+          <Property Type="Int32" Name="idVuelo" Nullable="true" />
+          <Property Type="Int32" Name="idPasajero" Nullable="true" />
+          <Property Type="Int32" Name="idAsiento" Nullable="true" />
+          <Property Type="Int32" Name="NoAsiento" Nullable="true" />
+          <Property Type="Int32" Name="idTipoEstatus" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="SP_VUELO_ESCALAS_Result">
+          <Property Type="Int32" Name="idEscala" Nullable="false" />
+          <Property Type="Int32" Name="idVuelo" Nullable="true" />
+          <Property Type="String" Name="Destino" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaHora" Nullable="false" Precision="16" />
+        </ComplexType>
+        <EntityType Name="TranLog">
+          <Key>
+            <PropertyRef Name="idTranLog" />
+          </Key>
+          <Property Name="idTranLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TX" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Tabla" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <ComplexType Name="SP_LOGS_FECHA_Result">
+          <Property Type="Int32" Name="idTranLog" Nullable="false" />
+          <Property Type="String" Name="TX" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="Tabla" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="16" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoBDDModelStoreContainer" CdmEntityContainer="ProyectoBDDEntities">
+          <EntitySetMapping Name="Asiento">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.Asiento">
+              <MappingFragment StoreEntitySet="Asiento">
+                <ScalarProperty Name="idAsiento" ColumnName="idAsiento" />
+                <ScalarProperty Name="idAvion" ColumnName="idAvion" />
+                <ScalarProperty Name="idTipoAsiento" ColumnName="idTipoAsiento" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Avion">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.Avion">
+              <MappingFragment StoreEntitySet="Avion">
+                <ScalarProperty Name="idAvion" ColumnName="idAvion" />
+                <ScalarProperty Name="idTipoAvion" ColumnName="idTipoAvion" />
+                <ScalarProperty Name="Compañia" ColumnName="Compañia" />
+                <ScalarProperty Name="Carga" ColumnName="Carga" />
+                <ScalarProperty Name="Alcance" ColumnName="Alcance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cola">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.Cola">
+              <MappingFragment StoreEntitySet="Cola">
+                <ScalarProperty Name="idCola" ColumnName="idCola" />
+                <ScalarProperty Name="idPasajero" ColumnName="idPasajero" />
+                <ScalarProperty Name="idVueloPasajero" ColumnName="idVueloPasajero" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Escala">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.Escala">
+              <MappingFragment StoreEntitySet="Escala">
+                <ScalarProperty Name="idEscala" ColumnName="idEscala" />
+                <ScalarProperty Name="idVuelo" ColumnName="idVuelo" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pasajero">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.Pasajero">
+              <MappingFragment StoreEntitySet="Pasajero">
+                <ScalarProperty Name="idPasajero" ColumnName="idPasajero" />
+                <ScalarProperty Name="idTipoPasajero" ColumnName="idTipoPasajero" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Pasaporte" ColumnName="Pasaporte" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAsiento">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.TipoAsiento">
+              <MappingFragment StoreEntitySet="TipoAsiento">
+                <ScalarProperty Name="idTipoAsiento" ColumnName="idTipoAsiento" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAvion">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.TipoAvion">
+              <MappingFragment StoreEntitySet="TipoAvion">
+                <ScalarProperty Name="idTipoAvion" ColumnName="idTipoAvion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEstatus">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.TipoEstatus">
+              <MappingFragment StoreEntitySet="TipoEstatus">
+                <ScalarProperty Name="idTipoEstatus" ColumnName="idTipoEstatus" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPasajero">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.TipoPasajero">
+              <MappingFragment StoreEntitySet="TipoPasajero">
+                <ScalarProperty Name="idTipoPasajero" ColumnName="idTipoPasajero" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vuelo">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.Vuelo">
+              <MappingFragment StoreEntitySet="Vuelo">
+                <ScalarProperty Name="idVuelo" ColumnName="idVuelo" />
+                <ScalarProperty Name="idAvion" ColumnName="idAvion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
+                <ScalarProperty Name="CiudadDestino" ColumnName="CiudadDestino" />
+                <ScalarProperty Name="AeropuertoOrigen" ColumnName="AeropuertoOrigen" />
+                <ScalarProperty Name="AeropuertoDestino" ColumnName="AeropuertoDestino" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="FechaLlegada" ColumnName="FechaLlegada" />
+                <ScalarProperty Name="Jornada" ColumnName="Jornada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VueloPasajero">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.VueloPasajero">
+              <MappingFragment StoreEntitySet="VueloPasajero">
+                <ScalarProperty Name="idVueloPasajero" ColumnName="idVueloPasajero" />
+                <ScalarProperty Name="idVuelo" ColumnName="idVuelo" />
+                <ScalarProperty Name="idPasajero" ColumnName="idPasajero" />
+                <ScalarProperty Name="idAsiento" ColumnName="idAsiento" />
+                <ScalarProperty Name="NoAsiento" ColumnName="NoAsiento" />
+                <ScalarProperty Name="idTipoEstatus" ColumnName="idTipoEstatus" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_INGRESAR_VUELO" FunctionName="ProyectoBDDModel.Store.SP_INGRESAR_VUELO" />
+          <FunctionImportMapping FunctionImportName="SP_CONFIRMAR_ASIENTO" FunctionName="ProyectoBDDModel.Store.SP_CONFIRMAR_ASIENTO" />
+          <FunctionImportMapping FunctionImportName="SP_INGRESAR_CLIENTE" FunctionName="ProyectoBDDModel.Store.SP_INGRESAR_CLIENTE" />
+          <FunctionImportMapping FunctionImportName="SP_INGRESAR_CLIENTE_BULK" FunctionName="ProyectoBDDModel.Store.SP_INGRESAR_CLIENTE_BULK" />
+          <FunctionImportMapping FunctionImportName="SP_INGRESAR_TRIPULACION" FunctionName="ProyectoBDDModel.Store.SP_INGRESAR_TRIPULACION" />
+          <FunctionImportMapping FunctionImportName="SP_RESERVAR_ASIENTO" FunctionName="ProyectoBDDModel.Store.SP_RESERVAR_ASIENTO" />
+          <FunctionImportMapping FunctionImportName="SP_INGRESAR_ESCALA" FunctionName="ProyectoBDDModel.Store.SP_INGRESAR_ESCALA" />
+          <FunctionImportMapping FunctionImportName="SP_CANCELAR_RESERVA" FunctionName="ProyectoBDDModel.Store.SP_CANCELAR_RESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_CANCELAR_VUELO" FunctionName="ProyectoBDDModel.Store.SP_CANCELAR_VUELO" />
+          <FunctionImportMapping FunctionImportName="SP_VUELO_ASIENTOS" FunctionName="ProyectoBDDModel.Store.SP_VUELO_ASIENTOS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoBDDModel.SP_VUELO_ASIENTOS_Result">
+                <ScalarProperty Name="idVueloPasajero" ColumnName="idVueloPasajero" />
+                <ScalarProperty Name="idVuelo" ColumnName="idVuelo" />
+                <ScalarProperty Name="idPasajero" ColumnName="idPasajero" />
+                <ScalarProperty Name="idAsiento" ColumnName="idAsiento" />
+                <ScalarProperty Name="NoAsiento" ColumnName="NoAsiento" />
+                <ScalarProperty Name="idTipoEstatus" ColumnName="idTipoEstatus" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_COLA_AÑO" FunctionName="ProyectoBDDModel.Store.SP_COLA_AÑO" />
+          <FunctionImportMapping FunctionImportName="SP_CONFIRMADOS_DIA" FunctionName="ProyectoBDDModel.Store.SP_CONFIRMADOS_DIA" />
+          <FunctionImportMapping FunctionImportName="SP_VUELO_ESCALAS" FunctionName="ProyectoBDDModel.Store.SP_VUELO_ESCALAS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoBDDModel.SP_VUELO_ESCALAS_Result">
+                <ScalarProperty Name="idEscala" ColumnName="idEscala" />
+                <ScalarProperty Name="idVuelo" ColumnName="idVuelo" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TranLog">
+            <EntityTypeMapping TypeName="ProyectoBDDModel.TranLog">
+              <MappingFragment StoreEntitySet="TranLog">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Tabla" ColumnName="Tabla" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="TX" ColumnName="TX" />
+                <ScalarProperty Name="idTranLog" ColumnName="idTranLog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_INGRESAR_TRANLOG" FunctionName="ProyectoBDDModel.Store.SP_INGRESAR_TRANLOG" />
+          <FunctionImportMapping FunctionImportName="SP_LOGS_FECHA" FunctionName="ProyectoBDDModel.Store.SP_LOGS_FECHA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoBDDModel.SP_LOGS_FECHA_Result">
+                <ScalarProperty Name="idTranLog" ColumnName="idTranLog" />
+                <ScalarProperty Name="TX" ColumnName="TX" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Tabla" ColumnName="Tabla" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_VUELOS_COMERCIALES" FunctionName="ProyectoBDDModel.Store.SP_VUELOS_COMERCIALES" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

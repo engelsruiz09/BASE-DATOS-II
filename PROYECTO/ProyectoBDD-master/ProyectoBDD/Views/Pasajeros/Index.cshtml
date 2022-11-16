@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ProyectoBDD.Models.Pasajero>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <form asp-action="Index" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="Cargar" />
+    </form>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pasaporte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoPasajero.Tipo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pasaporte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoPasajero.Tipo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idPasajero }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idPasajero }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idPasajero })
+            </td>
+        </tr>
+    }
+
+</table>

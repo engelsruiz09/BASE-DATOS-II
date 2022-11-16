@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ProyectoBDD.Models.Vuelo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @Html.ActionLink("Ver Escalas", "Index", "Escalas")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CiudadOrigen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CiudadDestino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AeropuertoOrigen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AeropuertoDestino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaLlegada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avion.Compañia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CiudadOrigen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CiudadDestino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AeropuertoOrigen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AeropuertoDestino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaLlegada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avion.Compañia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idVuelo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idVuelo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idVuelo })
+        </td>
+    </tr>
+}
+
+</table>

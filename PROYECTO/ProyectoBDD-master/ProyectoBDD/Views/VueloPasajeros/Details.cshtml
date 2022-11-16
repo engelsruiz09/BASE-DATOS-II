@@ -1,0 +1,70 @@
+﻿@model ProyectoBDD.Models.VueloPasajero
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="text-center">
+    <p style="font-size:larger; color:red">@ViewData["Error"]</p>
+</div>
+
+<div>
+    <h4>VueloPasajero</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoAsiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoAsiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asiento.TipoAsiento.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asiento.TipoAsiento.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pasajero.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pasajero.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEstatus.Estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEstatus.Estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vuelo.idVuelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vuelo.idVuelo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idVueloPasajero }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
